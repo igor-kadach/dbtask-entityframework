@@ -54,7 +54,7 @@ namespace DataBaseTask
             Assert.AreEqual(expectedCurrency, actualCurrency);
 
 
-            //Add new person
+            //Add new person to table
             var person = new Person()
             {
                 PersonType = "IN",
@@ -68,7 +68,7 @@ namespace DataBaseTask
             dbContext.People.Add(person);
             dbContext.SaveChanges();
 
-            //Modiffy person 
+            //Stored Procedures/Modiffy person 
             SqlParameter param = new("@BusinessEntityID", 1);
             SqlParameter param1 = new("@NationalIDNumber", 295847284);
             SqlParameter param2 = new SqlParameter("@BirthDate", System.Data.SqlDbType.DateTime);
