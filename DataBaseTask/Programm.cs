@@ -1,14 +1,7 @@
 ﻿using DataBaseTask.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using NUnit.Framework;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.Management;
-using System.Collections;
 
 
 namespace DataBaseTask
