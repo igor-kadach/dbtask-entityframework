@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseTask.Models
+namespace DataBaseTask.Helpers
 {
-    internal class Class1
+    internal class StoredProcedureHelper
     {
     }
 }
