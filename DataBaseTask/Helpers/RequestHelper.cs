@@ -3,18 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataBaseTask.Helpers
 {
-   // private DBContext dBContext;
-
     public static class RequestHelper 
     {
-  
-       // DBContext dBContext = new DBContext();
-
-
         //Get person's email and phone                  
         public static string GetPersonEmail()
         {
-          //  using var dbContext = new DBContext();
+            using var dbContext = new DBContext();
 
             var peoplePhoneEmail = dbContext.People.Include(p => p.PersonPhones).Include(p => p.EmailAddresses).Select(p => p.FirstName).Where(p => p == "Ken").ToList();
             string actualPerson = peoplePhoneEmail[0];
