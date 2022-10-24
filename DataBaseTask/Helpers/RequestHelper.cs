@@ -5,54 +5,44 @@ namespace DataBaseTask.Helpers
 {
     public static class RequestHelper 
     {
-        //Get person's email and phone                  
-        public static string GetPersonEmail()
+        //Get person                  
+        public static Person GetPerson(string name)
         {
             using var dbContext = new DBContext();
 
-            var peoplePhoneEmail = dbContext.People.Include(p => p.PersonPhones).Include(p => p.EmailAddresses).Select(p => p.FirstName).Where(p => p == "Ken").ToList();
-            string actualPerson = peoplePhoneEmail[0];
-            return actualPerson;
+            return dbContext.People.Include(p => p.PersonPhones).Include(p => p.EmailAddresses).First(p => p.FirstName == name);
         }
 
         //Get product name by Id
-        public static string GetProductName()
+        public static Product GetProduct(int id)
         {
             using var dbContext = new DBContext();
 
-            var product = dbContext.Products.Include(p => p.ProductCostHistories).Where(p => p.ProductId == 707).Select(p => p.Name).ToList();
-            string actualProduct = product[0];
-            return actualProduct;
+            return dbContext.Products.Include(p => p.ProductCostHistories).First(p => p.ProductId == id);
         }
 
-        //Get product id photo
-        public static int GetIdPhoto()
+        //Get product name by ModelId
+        public static ProductModel GetProductName(int productModelId)
         {
-            using var dbContext = new DBContext();
+            using var dbContext = new DBContext();           
 
-            var productPhoto = dbContext.ProductPhotos.Include(p => p.ProductProductPhotos).OrderBy(p => p.ModifiedDate).Select(p => p.ProductPhotoId).Take(10).ToList();
-            var actualProductPhoto = productPhoto[5];
-            return actualProductPhoto;
+            return dbContext.ProductModels.Include(p => p.ProductModelProductDescriptionCultures).First(p => p.ProductModelId == productModelId);        
         }
 
         //Get product name by vendor 
-        public static string GetProductNameByVendor()
+        public static Product GetProductByVendor(string vendorName)
         {
             using var dbContext = new DBContext();
 
-            var productVendor = dbContext.Products.Include(p => p.ProductVendors).Select(p => p.ProductNumber).Distinct().Take(5).ToList();
-            var actualProductVendor = productVendor[1];
-            return actualProductVendor;
+            return dbContext.Products.Include(p => p.ProductVendors).First(p => p.ProductVendors.Select(pv => pv.BusinessEntity.Name).Contains(vendorName));           
         }
 
         //Get currency by currency code
-        public static string GetCurrency()
+        public static Currency GetCurrency(string code)
         {
             using var dbContext = new DBContext();
 
-            var currency = dbContext.Currencies.Include(c => c.CountryRegionCurrencies).Where(c => c.CurrencyCode == "eur" || c.CurrencyCode == "de").Select(c => c.Name).Take(5).ToList();
-            var actualCurrency = currency[0];
-            return actualCurrency;
+            return dbContext.Currencies.Include(c => c.CountryRegionCurrencies).First(c => c.CurrencyCode == code);
         }
     }
 }
